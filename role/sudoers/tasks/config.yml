@@ -1,0 +1,12 @@
+---
+- name: manage sudoers
+  copy:
+    dest: '/etc/sudoers.d/70_{{ item.key }}'
+    content: "{{ item.key }} ALL=(ALL) NOPASSWD: {{ item.value }}\n"
+    owner: root
+    group: root
+    mode: '0400'
+  with_dict: '{{ sudoers_options }}'
+  when: sudoers_options is defined
+  tags: [sudo]
+

@@ -1,0 +1,49 @@
+---
+- name: create groups
+  group:
+    name: '{{ item }}'
+    state: present
+  with_items: '{{ groups_enabled }}'
+  tags:
+    - users
+
+- name: remove groups
+  group:
+    name: '{{ item }}'
+    state: absent
+  with_items: '{{ groups_absent }}'
+  tags:
+    - users
+
+- name: create users if team enabled
+  user:
+    name: '{{ item.key }}'
+    state: present
+    groups: '{{ item.value.groups | default("users") }}'
+    create_home: true
+    comment: '{{ item.value.description | default("Ansible managed users") }}'
+    shell: '{{ item.value.shell | default("/bin/bash") }}'
+  when: item.value.groups in groups_enabled
+  with_dict: "{{ users }}"
+  tags:
+    - users
+
+- name: adding authorized_keys
+  authorized_key:
+    key: "{{ item.value.ssh_keys | default([]) | join ('\n') }}"
+    user: "{{ item.key }}"
+    exclusive: true
+  when: item.value.groups in groups_enabled
+  with_dict: "{{ users }}"
+  tags:
+    - users
+
+- name: remove old users
+  user:
+    name: '{{ item }}'
+    state: absent
+    remove: true
+  with_items: '{{ users_absent }}'
+  tags:
+    - users
+

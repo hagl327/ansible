@@ -1,0 +1,9 @@
+---
+user_absent: []
+
+users:
+  egerasimov:
+    groups: devops
+    description: Gerasimov Evgeniy
+    ssh_keys:
+      - ssh-ed25519 11111111112222222222233333333333334444444445555555

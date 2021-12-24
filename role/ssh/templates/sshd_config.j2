@@ -1,0 +1,29 @@
+AddressFamily any
+Port 22
+ListenAddress 0.0.0.0
+ListenAddress ::
+
+AcceptEnv LANG LC_*
+AllowAgentForwarding yes
+AllowTcpForwarding yes
+ChallengeResponseAuthentication no
+ClientAliveCountMax 3
+ClientAliveInterval 0
+Compression delayed
+GatewayPorts no
+HostKey /etc/ssh/ssh_host_rsa_key
+HostKey /etc/ssh/ssh_host_ecdsa_key
+HostKey /etc/ssh/ssh_host_ed25519_key
+LogLevel VERBOSE
+PasswordAuthentication no
+PermitEmptyPasswords no
+PermitRootLogin without-password
+PrintMotd no
+Protocol 2
+StrictModes yes
+Subsystem sftp /usr/lib/openssh/sftp-server
+SyslogFacility AUTH
+TCPKeepAlive yes
+UseDNS no
+UsePAM yes
+X11Forwarding yes

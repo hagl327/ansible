@@ -1,0 +1,27 @@
+---
+- shell: "egrep -c '(vmx|svm)' /proc/cpuinfo"
+  register: virt_status
+  
+- name: Virtualization support checker
+  fail: 
+    msg: "Your system is not support virtualization"
+  when: virt_status == 0
+
+- name: Update
+  apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+
+- name: Ensure a list of packages installed
+  apt:
+    name: "{{ req_packages }}"
+    state: present
+  apt: name=libvirt-daemon state=present
+  notify: restart libvirtd
+
+- name: Append kvm admins to specified groups
+  user:
+    name: {{ item }}
+    groups: libvirt-qemu,kvm
+    append: yes
+
+- debug:
+    msg: "The qemu+kvm configuration is complete. Your system needs to be rebooted"

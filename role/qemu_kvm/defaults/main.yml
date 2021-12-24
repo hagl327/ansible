@@ -2,7 +2,6 @@
 req_packages:
   - qemu
   - qemu-kvm
-  - libvirt-daemon
   - libvirt-clients
   - bridge-utils
   - virt-manager

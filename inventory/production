@@ -1,0 +1,12 @@
+---
+production:
+  children:
+    my_notes:
+    test:
+
+my_notes:
+    hosts:
+        ip-addres-or-hostname:
+            ansible_user: user
+            ansible_ssh_file : /Users/user/.ssh/id_rsa.pub
+            ansible_python_interpreter: /usr/bin/python3

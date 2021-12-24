@@ -1,0 +1,7 @@
+---
+- name: Install Vagrant&Packer
+  hosts: all
+  serial: 100
+  become: true
+  roles:
+    - vagrant

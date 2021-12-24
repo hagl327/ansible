@@ -1,0 +1,7 @@
+---
+- name: Install Google-Chrome
+  hosts: all
+  serial: 100
+  become: true
+  roles:
+    - google-chrome

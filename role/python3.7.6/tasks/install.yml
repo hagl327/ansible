@@ -1,0 +1,26 @@
+---
+- name: "Download python {{ python_version }} source code"
+  get_url:
+    url: {{ python_ftp_url }}{{ python_version }}/Python-{{ python_version }}.tgz
+    dest: /tmp/Python-{{ python_version }}.tgz
+    mode: '0644'
+
+- name: "Unpack python {{ python_version }} archive"
+  unarchive:
+    src: /tmp/Python-{{ python_version }}.tgz
+    dest: /tmp/
+    remote_src: yes
+
+- name: "Run 'configure'"
+  command: chdir=/tmp/Python-{{ python_version }} ./configure --enable-optimizations
+
+- name: "Run 'make altinstall'"
+  make:
+    chdir: /tmp/Python-{{ python_version }}
+    target: altinstall
+    file: /tmp/Python-{{ python_version }}/Makefile
+
+- name: "Remove python source code archive"
+  file:
+    path: /tmp/Python-{{ python_version }}.tgz
+    state: absent

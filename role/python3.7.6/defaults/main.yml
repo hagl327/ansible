@@ -1,0 +1,16 @@
+---
+req_packages:
+  - build-essential
+  - zlib1g-dev
+  - libncurses5-dev
+  - libgdbm-dev
+  - libnss3-dev
+  - libssl-dev
+  - libreadline-dev
+  - libffi-dev
+  - wget
+  - liblzma-dev
+  - curl
+
+python_ftp_url: "https://www.python.org/ftp/python/"
+python_version: "3.7.6"

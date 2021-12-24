@@ -1,0 +1,22 @@
+---
+old_packages:
+- docker
+- docker-engine
+- docker.io
+- containerd
+- runc
+
+https_packages:
+- apt-transport-https
+- ca-certificates
+- curl
+- gnupg
+- lsb-release
+
+docker_packages:
+- docker-ce
+- docker-ce-cli
+- containerd.io
+
+docker_apt_gpg_key: https://download.docker.com/linux/ubuntu/gpg
+

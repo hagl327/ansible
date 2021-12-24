@@ -1,0 +1,7 @@
+---
+- name: Install ansible and docker
+  hosts: all
+  serial: 100
+  become: true
+  roles:
+    - ansible_docker

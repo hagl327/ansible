@@ -1,0 +1,7 @@
+---
+- name: Install and setup qume+kvm
+  hosts: all
+  serial: 100
+  become: true
+  roles:
+    - qemu_kvm

@@ -1,0 +1,12 @@
+---
+- hosts: all
+  tasks:
+  - name: Ping module
+    ping:
+    register: ping_result
+    ignore_unreachable: true
+
+  - fail:
+      msg: "Please make sure all server up and run again"
+    when: ping_result.unreachable is defined
+

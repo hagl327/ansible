@@ -1,0 +1,19 @@
+---
+include: pre-install.yml
+include: install.yml
+
+- name: ensure prometheus service is started and enabled
+  become: true
+  systemd:
+    daemon_reload: true
+    name: prometheus
+    state: started
+    enabled: true
+
+- name: ensure node_exporter service is started and enabled
+  become: true
+  systemd:
+    daemon_reload: true
+    name: node_exporter
+    state: started
+    enabled: true
